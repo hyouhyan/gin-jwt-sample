@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 
-	"github.com/hyouhyan/gin-jwt-sample/auth"
+	"github.com/hyouhyan/gin-jwt-sample/config"
 	"github.com/hyouhyan/gin-jwt-sample/model"
 )
 
@@ -32,7 +32,7 @@ func LoginHandler(c *gin.Context) {
 		"username": inputUser.Username,
 		"exp":      time.Now().Add(time.Hour * 24).Unix(),
 	})
-	tokenString, err := token.SignedString([]byte(auth.SECRET_KEY))
+	tokenString, err := token.SignedString([]byte(config.SECRET_KEY))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "error signing token"})
 		return
